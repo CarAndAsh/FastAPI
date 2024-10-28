@@ -92,3 +92,15 @@ def demo_auth_check_cookie(user_session_data: dict = Depends(get_session_data)):
         'message': f'Hello, {user_session_data["username"]}',
         **user_session_data
     }
+
+
+@router.get('/logout_cookie/')
+def demo_auth_logout_coookie(
+        response: Response,
+        session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY),
+        user_session_data: dict = Depends(get_session_data)
+):
+    username = user_session_data['username']
+    COOKIES.pop(session_id)
+    response.delete_cookie(COOKIE_SESSION_ID_KEY)
+    return {'message': f'Bye {username}!'}
