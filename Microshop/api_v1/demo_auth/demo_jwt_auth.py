@@ -1,4 +1,6 @@
 from fastapi import APIRouter, Depends, Form, HTTPException, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from jwt import InvalidTokenError
 
 from pydantic import BaseModel
 
@@ -12,6 +14,8 @@ class TokenInfo(BaseModel):
 
 
 router = APIRouter(prefix='/jwt', tags=['JWT'])
+
+http_bearer = HTTPBearer()
 
 max = UserSchema(username='max', password=auth_utils.hash_password('pass'), email='max@examp.le')
 zack = UserSchema(username='zack', password=auth_utils.hash_password('word'))
@@ -38,7 +42,29 @@ def validate_auth_user(
     return user
 
 
-@router.post('/login', response_model=TokenInfo)
+def get_current_token_payload(credentials: HTTPAuthorizationCredentials = Depends(http_bearer)) -> UserSchema:
+    token = credentials.credentials
+    try:
+        payload = auth_utils.decode_jwt(token)
+    except InvalidTokenError as exc:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f'invalid token error: {exc}')
+    return payload
+
+
+def get_current_auth_user(payload: dict = Depends(get_current_token_payload)) -> UserSchema:
+    username: str | None = payload.get('sub')
+    if user := user_db.get(username):
+        return user
+    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='ttoken invalid (user not found)')
+
+
+def get_current_auth_active_user(user: UserSchema = Depends(get_current_auth_user)):
+    if user.active:
+        return user
+    raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='user inactive')
+
+
+@router.post('/login/', response_model=TokenInfo)
 def auth_user_jwt(user: UserSchema = Depends(validate_auth_user)):
     jwt_payload = {
         'sub': user.username,
@@ -47,3 +73,15 @@ def auth_user_jwt(user: UserSchema = Depends(validate_auth_user)):
     }
     token = auth_utils.encode_jwt(payload=jwt_payload)
     return TokenInfo(access_token=token, token_type='Bearer')
+
+
+@router.get('/users/me/')
+def auth_user_self_check_info(
+        user: UserSchema = Depends(get_current_auth_active_user),
+        payload: dict = Depends(get_current_token_payload)
+):
+    return {
+        'username': user.username,
+        'email': user.email,
+        'logged_in_at': payload.get('iat')
+    }
