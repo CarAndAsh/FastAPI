@@ -5,3 +5,7 @@
 ## Token auth
 
 ## Cookie auth
+
+## JWT
+
+### Токены Access + Refresh
