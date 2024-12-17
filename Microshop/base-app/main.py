@@ -11,6 +11,9 @@ from core.models import db_helper
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # startup
+    # For fast test of work with DB
+    # async with db_helper.engine.begin() as conn:
+    #     await conn.run_sync(Base.metadata.create_all/drop_all)
     yield
     # shutdowm
     await db_helper.dispose()
