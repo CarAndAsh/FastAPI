@@ -5,4 +5,4 @@ Links:
  - https://docs.pydantic.dev/latest/concepts/pydantic_settings/#parsing-environment-variable-values
  - https://alembic.sqlalchemy.org/en/latest/cookbook.html
  - https://docs.sqlalchemy.org/en/20/core/constraints.html#constraint-naming-conventions
- - 
+ - https://alembic.sqlalchemy.org/en/latest/naming.html#integration-of-naming-conventions-into-operations-autogenerate
