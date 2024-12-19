@@ -5,6 +5,7 @@ Links:
   - 
   - https://fastapi.tiangolo.com/advanced/events/
   - https://fastapi.tiangolo.com/advanced/events/#lifespan-function
+  - https://fastapi.tiangolo.com/advanced/custom-response/#use-orjsonresponse
 - SQLAlchemy:
   - 
   - https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
@@ -19,3 +20,4 @@ Links:
   - https://alembic.sqlalchemy.org/en/latest/naming.html#integration-of-naming-conventions-into-operations-autogenerate
   - https://alembic.sqlalchemy.org/en/latest/cookbook.html#using-asyncio-with-alembic
 - https://docs.python.org/3/library/typing.html
+- https://github.com/ijl/orjson
