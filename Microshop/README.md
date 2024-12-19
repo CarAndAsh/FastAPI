@@ -1,8 +1,21 @@
 Links:
- - https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
- - https://fastapi.tiangolo.com/advanced/events/
- - https://docs.pydantic.dev/latest/concepts/pydantic_settings/#dotenv-env-support
- - https://docs.pydantic.dev/latest/concepts/pydantic_settings/#parsing-environment-variable-values
- - https://alembic.sqlalchemy.org/en/latest/cookbook.html
- - https://docs.sqlalchemy.org/en/20/core/constraints.html#constraint-naming-conventions
- - https://alembic.sqlalchemy.org/en/latest/naming.html#integration-of-naming-conventions-into-operations-autogenerate
+-
+- .gitignore for Python https://github.com/github/gitignore/blob/main/Python.gitignore
+- FastAPI:
+  - 
+  - https://fastapi.tiangolo.com/advanced/events/
+  - https://fastapi.tiangolo.com/advanced/events/#lifespan-function
+- SQLAlchemy:
+  - 
+  - https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+  - https://docs.sqlalchemy.org/en/20/core/constraints.html#constraint-naming-conventions
+- Pydantic:
+  - 
+  - https://docs.pydantic.dev/latest/concepts/pydantic_settings/#dotenv-env-support
+  - https://docs.pydantic.dev/latest/concepts/pydantic_settings/#parsing-environment-variable-values
+- Alembic:
+  - 
+  - https://alembic.sqlalchemy.org/en/latest/cookbook.html
+  - https://alembic.sqlalchemy.org/en/latest/naming.html#integration-of-naming-conventions-into-operations-autogenerate
+  - https://alembic.sqlalchemy.org/en/latest/cookbook.html#using-asyncio-with-alembic
+- https://docs.python.org/3/library/typing.html
