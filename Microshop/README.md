@@ -6,6 +6,11 @@ Links:
   - https://fastapi.tiangolo.com/advanced/events/
   - https://fastapi.tiangolo.com/advanced/events/#lifespan-function
   - https://fastapi.tiangolo.com/advanced/custom-response/#use-orjsonresponse
+- FastAPI Users:
+  - 
+  - https://fastapi-users.github.io/fastapi-users/latest
+  - https://fastapi-users.github.io/fastapi-users/latest/configuration/overview
+  - https://fastapi-users.github.io/fastapi-users/latest/configuration/databases/sqlalchemy
 - SQLAlchemy:
   - 
   - https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
