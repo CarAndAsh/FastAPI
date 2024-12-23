@@ -22,5 +22,5 @@ class AccessToken(Base, SQLAlchemyBaseAccessTokenTable[UserIdType]):
     )
 
     @classmethod
-    def get_access_token_db(cls, session: AsyncSession):
+    def get_access_token_db(cls, session: 'AsyncSession'):
         return SQLAlchemyAccessTokenDatabase(session, cls)
