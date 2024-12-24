@@ -26,3 +26,7 @@ Links:
   - https://alembic.sqlalchemy.org/en/latest/cookbook.html#using-asyncio-with-alembic
 - https://docs.python.org/3/library/typing.html
 - https://github.com/ijl/orjson
+
+```shell
+python -c 'import secrets; print(secrets.token_hex())'
+```
