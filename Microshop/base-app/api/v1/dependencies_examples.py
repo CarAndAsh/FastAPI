@@ -3,7 +3,8 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, Header
 
 from utils.helper import GreatHelper, GreatService
-from .dependencies_for_example.cls_deps import PathReaderDependency, path_reader
+from .dependencies_for_example.cls_deps import PathReaderDependency, path_reader, TokenIntrospectResult, \
+    access_required, HeaderAccessDependency
 from .dependencies_for_example.func_deps import get_x_header, get_header_dependency, get_great_helper
 from core.config import settings
 
@@ -92,3 +93,17 @@ def path_reader_dependency(
         'reader': reader.read(example='Hello world!'),
         'message': 'path reader dependency from method'
     }
+
+
+@router.get('/direct-cls-dependency')
+def direct_cls_dependency(
+        token_data: Annotated[
+            TokenIntrospectResult, Depends(
+                HeaderAccessDependency(secret_token='secret')
+                # or access_required
+
+            )
+        ]
+):
+    return {'token_data': token_data.model_dump(),
+            'message': 'direct class dependency'}
