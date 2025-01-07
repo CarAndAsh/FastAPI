@@ -2,6 +2,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, Header
 
+from utils.helper import GreatHelper
 from .dependencies_for_example.func_deps import get_x_header, get_header_dependency
 from core.config import settings
 
@@ -36,13 +37,25 @@ def single_dependencies(
     }
 
 
-@router.get('/multi-inderect-dependency')
-def multi_inderect_dependency(
+@router.get('/multi-indirect-dependency')
+def multi_indirect_dependency(
         text_1: Annotated[str, Depends(get_header_dependency('header_1'))],
         text_2: Annotated[str, Depends(get_header_dependency('header_2', 'Hello, it is me'))]
 ):
     return {
         'header 1': text_1,
         'header 2': text_2,
-        'message': 'multi-inderect dependency in use'
+        'message': 'multi-indirect dependency in use'
+    }
+
+
+@router.get('/top-level-helper-creation')
+def top_level_helper_creation(
+        helper_name: Annotated[str, Depends(get_header_dependency('helper_name', 'HelperOne'))],
+        helper_default: Annotated[str, Depends(get_header_dependency('helper_default'))]
+):
+    helper = GreatHelper(name=helper_name, default=helper_default)
+    return {
+        'helper': helper.as_dict(),
+        'message': 'top level helper creation'
     }
