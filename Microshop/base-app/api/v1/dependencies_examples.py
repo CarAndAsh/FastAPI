@@ -3,6 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, Header
 
 from utils.helper import GreatHelper, GreatService
+from .dependencies_for_example.cls_deps import PathReaderDependency, path_reader
 from .dependencies_for_example.func_deps import get_x_header, get_header_dependency, get_great_helper
 from core.config import settings
 
@@ -74,4 +75,20 @@ def great_service_as_dependency(service: Annotated[GreatService, Depends(GreatSe
     return {
         'service': service.as_dict(),
         'message': 'helper as dependency'
+    }
+
+
+@router.get('/path-reader-dependency-from-method')
+def path_reader_dependency(
+        reader: Annotated[
+            PathReaderDependency,
+            Depends(
+                path_reader.as_dependency
+                # or PathReaderDependency(source).as_dependency
+            )
+        ]
+):
+    return {
+        'reader': reader.read(example='Hello world!'),
+        'message': 'path reader dependency from method'
     }
