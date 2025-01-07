@@ -8,10 +8,11 @@ class RunConfig(BaseModel):
 
 
 class ApiV1Prefix(BaseModel):
-    prefix: str = '/v1'
     auth: str = '/auth'
-    users: str = '/users'
+    deps: str = '/dependencies-example'
     messages: str = '/messages'
+    prefix: str = '/v1'
+    users: str = '/users'
 
 
 class ApiPrefix(BaseModel):
