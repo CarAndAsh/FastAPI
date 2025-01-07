@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, Header
 
 from utils.helper import GreatHelper
-from .dependencies_for_example.func_deps import get_x_header, get_header_dependency
+from .dependencies_for_example.func_deps import get_x_header, get_header_dependency, get_great_helper
 from core.config import settings
 
 router = APIRouter(tags=['Dependencies examples'], prefix=settings.api.v1.deps)
@@ -58,4 +58,12 @@ def top_level_helper_creation(
     return {
         'helper': helper.as_dict(),
         'message': 'top level helper creation'
+    }
+
+
+@router.get('/helper-as-dependency')
+def helper_as_dependency(helper: Annotated[GreatHelper, Depends(get_great_helper)]):
+    return {
+        'helper': helper.as_dict(),
+        'message': 'helper as dependency'
     }
